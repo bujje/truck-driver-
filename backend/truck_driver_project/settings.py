@@ -5,12 +5,13 @@ Django settings for truck_driver_project project.
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from backend .env explicitly
+load_dotenv(dotenv_path=BASE_DIR / '.env')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-for-development')
@@ -21,6 +22,8 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 if os.getenv('VERCEL'):
     ALLOWED_HOSTS.extend(['.vercel.app', '.now.sh'])
+# Allow Railway by default
+ALLOWED_HOSTS.extend(['.railway.app'])
 
 # Application definition
 INSTALLED_APPS = [
@@ -70,7 +73,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'truck_driver_project.wsgi.application'
 
 # Database
-if os.getenv('VERCEL'):
+# Prefer DATABASE_URL (Railway or any managed Postgres)
+if os.getenv('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'), conn_max_age=600)
+    }
+elif os.getenv('VERCEL'):
     # Vercel PostgreSQL
     DATABASES = {
         'default': {
@@ -168,6 +176,17 @@ if os.getenv('VERCEL'):
         'https://truck-driver-frontend.vercel.app',
         'https://truck-driver-phi.vercel.app',
     ])
+
+# Allow Netlify via regex and Railway for CSRF
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.netlify\.app$",
+]
+
+# CSRF trusted origins for cross-site POSTs
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.netlify.app',
+    'https://*.railway.app',
+]
 
 # Allow all origins in development
 if DEBUG:
