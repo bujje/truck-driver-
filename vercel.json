@@ -17,26 +17,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/truck_driver_project/wsgi.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/build/$1"
-    }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "truck_driver_project.settings",
-    "SECRET_KEY": "@secret-key",
-    "DEBUG": "False",
-    "ALLOWED_HOSTS": "@allowed-hosts",
-    "POSTGRES_DATABASE": "@postgres-database",
-    "POSTGRES_USER": "@postgres-user",
-    "POSTGRES_PASSWORD": "@postgres-password",
-    "POSTGRES_HOST": "@postgres-host",
-    "POSTGRES_PORT": "@postgres-port",
-    "MAP_API_KEY": "@map-api-key"
-  }
+    { "src": "/api/(.*)", "dest": "/backend/truck_driver_project/wsgi.py" },
+    { "src": "/(.*)", "dest": "/frontend/build/$1" }
+  ]
 }
-

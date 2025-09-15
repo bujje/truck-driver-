@@ -10,22 +10,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/manage.py"
-    }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "truck_driver_project.settings",
-    "SECRET_KEY": "@secret-key",
-    "DEBUG": "False",
-    "ALLOWED_HOSTS": "@allowed-hosts",
-    "DB_NAME": "@db-name",
-    "DB_USER": "@db-user",
-    "DB_PASSWORD": "@db-password",
-    "DB_HOST": "@db-host",
-    "DB_PORT": "@db-port",
-    "MAP_API_KEY": "@map-api-key"
-  }
+    { "src": "/(.*)", "dest": "/manage.py" }
+  ]
 }
-

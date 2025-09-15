@@ -10,13 +10,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "env": {
-    "REACT_APP_API_URL": "@react-app-api-url"
-  }
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
 }
-
