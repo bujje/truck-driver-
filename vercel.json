@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "installCommand": "npm ci --prefix frontend",
+  "buildCommand": "CI=false npm --prefix frontend run build",
+  "outputDirectory": "frontend/build",
+  "functions": {
+    "api/**/*.py": {
+      "runtime": "python3.11"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index.py" },
+    { "source": "/:path*", "destination": "/index.html" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/planner", "permanent": false }
+  ]
+}
+
+
