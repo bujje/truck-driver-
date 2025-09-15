@@ -19,8 +19,7 @@
   "routes": [
     { "src": "^/api/(.*)", "dest": "/backend/truck_driver_project/wsgi.py" },
     { "src": "^/$", "status": 308, "headers": { "Location": "/planner" } },
-    { "src": "/static/(.*)", "dest": "/frontend/build/static/$1" },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/frontend/build/index.html" }
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
