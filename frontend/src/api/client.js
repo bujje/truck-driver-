@@ -1,11 +1,9 @@
 // Axios client configured to work with Django (session/CSRF) via CRA proxy
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_API_BASE_URL || '/api/';
-
 const client = axios.create({
-  baseURL,
-  withCredentials: true, // include session cookies when using cookie auth
+  baseURL: '/api/', // CRA proxy forwards to http://localhost:8000
+  withCredentials: true, // include session cookies
 });
 
 // CSRF handling for Django when using session auth
