@@ -1,31 +1,13 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
-    },
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "50mb" }
-    }
-  ],
-  "build": {
-    "env": {
-      "CI": "false"
-    }
-  },
+  "buildCommand": "CI=false npm run build --prefix frontend",
+  "installCommand": "npm ci --prefix frontend",
+  "outputDirectory": "frontend/build",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/index.py" }
+    { "source": "/api/:path*", "destination": "/api/index.py" },
+    { "source": "/:path*", "destination": "/index.html" }
   ],
   "redirects": [
     { "source": "/", "destination": "/planner", "permanent": false }
-  ],
-  "headers": [],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
   ]
 }
