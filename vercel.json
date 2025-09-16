@@ -5,10 +5,10 @@
   "outputDirectory": "frontend/build",
   
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.py" }
+    { "src": "^/api$", "dest": "/api/index.py" },
+    { "src": "^/api/(.*)$", "dest": "/api/index.py/api/$1" }
   ],
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/index.py" },
     { "source": "/manifest.json", "destination": "/manifest.json" },
     { "source": "/static/:path*", "destination": "/static/:path*" },
     { "source": "/:path*", "destination": "/index.html" }
